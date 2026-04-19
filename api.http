@@ -1,7 +1,7 @@
 ### 👉👉👉 JWT login 👈👈👈
 
 # @name jwt_login
-POST http://localhost:3000/jwt/login
+POST http://localhost:3000/login
 Content-Type: application/json
 Origin: http://localhost:3000
 
@@ -16,7 +16,7 @@ Origin: http://localhost:3000
 
 ### 👉👉👉 Ge me 👈👈👈
 
-GET http://localhost:3000/jwt/me
+GET http://localhost:3000/me
 Authorization: Bearer {{ token }}
 
 ### 👉👉👉 Session login 👈👈👈
@@ -205,7 +205,7 @@ Authorization: Bearer {{ token }}
 # Accept: text/css
 
 ### Get csv of products
-GET http://localhost:3000/admin/products/listProducts.csv
+GET http://localhost:3000/admin/products/products.csv
 Authorization: Bearer {{ token }}
 
 ### 👉👉👉 Cart Endpoints 👈👈👈
@@ -221,7 +221,7 @@ POST http://localhost:3000/carts
 
 ### Add an item to the cart "customerId": "{{ customer_id }}",
 # @name addItemToCart
-POST http://localhost:3000/carts/{{cart_uuid}}/items
+POST http://localhost:3000/carts/{{ cart_uuid }}/items
 Content-Type: application/json
 
 {
@@ -237,7 +237,7 @@ Content-Type: application/json
 GET http://localhost:3000/carts/{{ cart_uuid }}
 
 ### Remove an item from the cart
-DELETE http://localhost:3000/carts/{{cart_uuid}}/items/1
+DELETE http://localhost:3000/carts/{{ cart_uuid }}/items/1
 Content-Type: application/json
 
 {
@@ -245,7 +245,7 @@ Content-Type: application/json
 }
 
 ### Clear the cart
-POST http://localhost:3000/carts/{{cart_uuid}}/clear
+POST http://localhost:3000/carts/clear
 
 ### 👉👉👉 Order Endpoints 👈👈👈
 

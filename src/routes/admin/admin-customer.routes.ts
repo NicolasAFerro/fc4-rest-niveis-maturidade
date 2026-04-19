@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:customerId", async (req, res) => {
   const customerService = await createCustomerService();
-  const customer = await customerService.getCustomer(+req.params.customerId);
+  const customer = await customerService.getCustomer(parseInt(req.params.customerId));
   res.send(customer ? customer : { message: "Customer not found" });
   //res.json(customer);
 });
@@ -45,6 +45,7 @@ router.delete("/:customerId", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const customerService = await createCustomerService();
+  //should validate query params
   const { page = 1, limit = 10 } = req.query;
   const { customers, total } = await customerService.listCustomers({
     page: parseInt(page as string),

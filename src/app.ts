@@ -197,7 +197,7 @@ app.use(async (req, res, next) => {
 //   }
 // })
 
-app.use("/jwt", jwtAuthRoutes);
+app.use("/", jwtAuthRoutes);
 app.use("/session", loginRoutes);
 app.use("/customers", customerRoutes);
 app.use("/categories", categoryRoutes);
