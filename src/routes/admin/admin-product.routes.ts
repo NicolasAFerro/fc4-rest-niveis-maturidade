@@ -30,6 +30,7 @@ router.post("/", corsCollection, async (req, res, next) => {
       price,
       categoryIds
     );
+    //201 Created e retorna o locations pelo header com uma sofisticacao, mas acho frescura, muito dificl de manter
     res.set("Location", `/admin/products/${product.id}`).status(201);
     const resource = new ProductResource(product, req);
     next(resource);
@@ -63,13 +64,16 @@ router.patch("/:productId", corsItem, async (req, res, next) => {
     price,
     categoryIds,
   });
+  console.info(" MEU PRODUCT", product);
   const resource = new ProductResource(product!, req);
+  console.info(" MEU RESOURCE", resource);
   next(resource);
 });
 
 router.delete("/:productId", corsItem, async (req, res) => {
   const productService = await createProductService();
   await productService.deleteProduct(+req.params.productId);
+  //204 no content, exclusao. Nao tenho dados para retornar no body ou na resposta 
   res.status(204).send();
 });
 
@@ -93,6 +97,7 @@ router.get("/", corsCollection, async (req, res, next) => {
     },
   });
 
+  // qual o media type que o cliente quer?
   if (
     !req.headers["accept"] ||
     req.headers["accept"] === "*/*" ||

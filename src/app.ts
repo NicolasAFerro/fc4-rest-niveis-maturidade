@@ -25,6 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // comum API terem multiplas formas de auth
 app.use(express.json());
+// express.urlencoded(...) → Content-Type: application/x-www-form-urlencoded (e, dependendo do caso, multipart/form-data não; para isso geralmente usa multer etc.)
 app.use(express.urlencoded({ extended: true }));
 
 //log requests
@@ -197,6 +198,8 @@ app.use(async (req, res, next) => {
 //   }
 // })
 
+//superir sao os middlewares e validaceos antes de chegar nas rotas
+
 app.use("/", jwtAuthRoutes);
 app.use("/session", loginRoutes);
 app.use("/customers", customerRoutes);
@@ -208,11 +211,14 @@ app.use("/admin/products", adminProductRoutes);
 app.use("/admin/customers", adminCustomerRoutes);
 app.use("/admin/categories", adminCategoryRoutes);
 
+
+//Pos middlwares, depois do retorno das rotas
 app.get("/", async (req, res) => {
   await createDatabaseConnection();
   res.send("Hello World!");
 });
 
+// middleware de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (!(error instanceof Error)) {
     return next(error);
