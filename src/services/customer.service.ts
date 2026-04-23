@@ -97,6 +97,8 @@ export async function createCustomerService(): Promise<CustomerService> {
   return new CustomerService(customerRepository, userRepository);
 }
 
+// isso aqui é tipagem do erro, o js nao tem classe de exception igual o c# e java
+
 export class UserAlreadyExistsError extends Error {
   constructor(email: string) {
     super(`User with email ${email} already exists`);
